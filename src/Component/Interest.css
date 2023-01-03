@@ -2,17 +2,18 @@
     background-color: rgb(169, 169, 28);
 } */
 .bgi{
-    background-color: #f9f9f9;
+    background-color: #1f1d1db4;
     min-height: 100vh;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center!important;
+    align-items: center; */
     display: flex;
-
+ 
     /* background-image: linear-gradient(to bottom ,#c8b6b6 , black); */
 }
 .card{
     width: fit-content;
-    margin: auto;
+    height: fit-content;
+    /* margin: auto; */
     background-color: white;
     border: none;
     box-shadow: 5px 5px 5px 5px rgba(56, 51, 51, 0.669);
@@ -24,4 +25,17 @@ form{
 }
 label{
     margin-top: 10px;
+}
+select ,input{
+    width: 250px;
+    padding: 10px;
+}
+@media screen and (max-width:400px) {
+
+    select ,input{
+    width:150px;
+}
+}
+BarChart{
+    width: 300px;
 }

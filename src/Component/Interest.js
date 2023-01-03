@@ -9,20 +9,10 @@ const Interest = () => {
     const [rate,setRate]=useState()
     const [time,setTime]=useState()
     const [result,setResult]=useState(0)
-    const [amont ,setAmount]=useState()
+    const [amont ,setAmount]=useState(0)
     const [err,setErr]=useState()
     const [graph,setGraph]=useState([])
-    // const data = 
-    // [
-
-    
-    //   {
-    //     name: 'Page A',
-    //     uv: result,
-        
-    //   }
-    // ]
-     
+  
      
   
     function calculate(e)
@@ -42,7 +32,7 @@ const Interest = () => {
        
           setResult(interest)
           setAmount(Number(principle)+Number(interest))
-          const data={name:"si",uv:result}
+          const data={name:"si",Interest:interest}
           setGraph([data,...graph])
           console.log("gr:",graph)
 
@@ -56,7 +46,7 @@ const Interest = () => {
         uv: result,
         
       },)
-      const data={name:"ci",uv:result}
+      const data={name:"ci",Interest:interest}
       setGraph([data,...graph])
       console.log("gr:",graph)
 
@@ -71,8 +61,10 @@ const Interest = () => {
     
        
      
-  <div className='bgi d-flex justify-content-center align-item-center'>
-    <div className='card p-5 mt-5 '>
+  <div className='bgi  '>
+  <div className="container d-flex flex-md-row flex-column">
+  <div className='w-md-50 w-100'>
+  <div className='card p-5 mt-5  '>
     <form action="" onSubmit={calculate}>
     <select name="" id="" onChange={(e)=>setType(e.target.value)}>
         <option value="si">simple Interest</option>
@@ -93,21 +85,25 @@ const Interest = () => {
         <br />
         <span className='text-danger'>{err}</span>
         <br />
-        <button className='px-3 btn btn-success rounded-2 mt-1'>submit</button>
+        <button className='px-3 btn btn-success w-100 rounded-2 mt-1'>Calculate</button>
         
         
     </form>
-    <p className='h4 mt-2'>Total Interest:{result}</p>
-    <p className='h4'>Total Amount:{amont}</p>
+    <p className='h4 mt-2'>Total Interest:&#8377;{result}</p>
+    <p className='h4'>Total Amount:&#8377;{amont}</p>
    
 
 </div>
-{/* Charts sections */}
+  </div>
 
-        <BarChart
-        className='m-auto mt-5'
+{/* Charts sections */}
+<div className='my-auto -ml-5'>
+
+<BarChart
+        className=' mt-5'
+        
           width={400}
-          height={300}
+          height={400}
           data={graph}
           margin={{
             top: 20,
@@ -116,16 +112,19 @@ const Interest = () => {
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
+          <CartesianGrid strokeDasharray="3 3"  stroke="white"/>
+          <XAxis dataKey="name" stroke="white" />
+          <YAxis stroke="white" />
           <Tooltip />
           <Legend />
           {/* <Bar dataKey="pv" stackId="a" fill="#8884d8" />
           <Bar dataKey="amt" stackId="a" fill="#82ca9d" /> */}
-          <Bar dataKey="uv" fill="blue" />
+          <Bar dataKey="Interest" fill="blue" />
         </BarChart>
+</div>
+       
       
+</div>
 </div>
     </>
     
