@@ -7,6 +7,7 @@ const Interest = () => {
     const [type,setType]=useState("si")
     const [principle,setPrinciple]=useState()
     const [rate,setRate]=useState()
+    const [tperiod,setTperiod]=useState(1)
     const [time,setTime]=useState()
     const [result,setResult]=useState(0)
     const [amont ,setAmount]=useState(0)
@@ -17,7 +18,7 @@ const Interest = () => {
   
     function calculate(e)
     {
-       
+      //  alert(tperiod)
         let interest;
         e.preventDefault()
         if(!principle || !rate ||!time )
@@ -28,17 +29,22 @@ const Interest = () => {
       setErr("")
       if(type==="si")
       {
-          interest=(principle*rate*time)/100
+          interest=(principle*rate*time*tperiod)/(100*tperiod) 
        
           setResult(interest)
           setAmount(Number(principle)+Number(interest))
           const data={name:"si",Interest:interest}
           setGraph([data,...graph])
           console.log("gr:",graph)
+          principle()
+          result()
+          time()
+          
 
       }
      else{
-      interest=principle*(Math.pow((1+rate/100),time)) - principle
+      // interest=principle*(Math.pow((1+rate/100),time)) - principle
+      interest=principle * (Math.pow((1 + (rate / (100*tperiod))), (tperiod * time))) - principle;
       setResult(interest.toFixed(2))
       setAmount((Number(principle)+Number(interest)).toFixed(2))
       setGraph(...graph, {
@@ -79,6 +85,14 @@ const Interest = () => {
         <br />
         <input type="text"  onChange={(e)=>setRate(e.target.value)}/></label>
         <br />
+        <label htmlFor="">Time Period</label>
+        <br />
+        <select name="" id="" onChange={(e)=>setTperiod(e.target.value)}>
+          <option value="1">Annually</option>
+          <option value="2">Half yearly</option>
+          <option value="4">Quarterly</option>
+        </select>
+        <br />
         <label htmlFor="">Time:
         <br />
         <input type="text" onChange={(e)=>setTime(e.target.value)} /></label>
@@ -97,7 +111,7 @@ const Interest = () => {
   </div>
 
 {/* Charts sections */}
-<div className='my-auto -ml-5'>
+<div className='my-auto '>
 
 <BarChart
         className=' mt-5'
